@@ -2,15 +2,6 @@
 
 #include <string>
 
-#define TT_INT		= "TT_INT";
-#define TT_FLOAT	= "TT_FLOAT";
-#define TT_PLUS		= "TT_PLUS";
-#define TT_MINUS	= "TT_MINUS";
-#define TT_MUL		= "TT_MUL";
-#define TT_DIV		= "TT_DIV";
-#define TT_LPAREN	= "TT_LPAREN";
-#define TT_RPAREN	= "TT_RPAREN";
-
 enum class TT
 {
 	INT,
