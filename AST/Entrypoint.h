@@ -14,7 +14,7 @@ int main()
 {
 	//Token<int>* tok = new Token<int>(TT::INT, 5);
 
-	LexerVal val = Lexer::Run("u5.78 + 9.5 / (5 * 8)");
+	LexerVal val = Lexer::Run("<myFile>","5.78 + 9.5 / (5 * 8)");
 
 	std::cout << val;
 	//std::cout << tok->repr() << std::endl;

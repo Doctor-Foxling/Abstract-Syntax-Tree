@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AST\Error.h" />
+    <ClInclude Include="AST\Position.h" />
     <ClInclude Include="AST\Lexer.h" />
     <ClInclude Include="AST\Token.h" />
     <ClInclude Include="AST\TokenType.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AST\Position.cpp" />
     <ClCompile Include="Entrypoint.h" />
     <ClCompile Include="AST\Error.cpp" />
     <ClCompile Include="AST\Lexer.cpp" />

@@ -2,16 +2,25 @@
 #include "Lexer.h"
 
 
-Lexer::Lexer(std::string text)
-	: m_Text(text), m_Pos(-1), m_currentChar((char)0)
+
+Lexer::Lexer(std::string& fn, std::string& text)
+	: m_Text(text), m_currentChar((char)0)
 {
+	m_Pos = std::make_shared<Position>(-1, 0, -1, fn, text);
+	advance();
+}
+
+Lexer::Lexer(std::string&& fn, std::string&& text)
+	: m_Text(text), m_currentChar((char)0)
+{
+	m_Pos = std::make_shared<Position>(-1, 0, -1, fn, text);
 	advance();
 }
 
 void Lexer::advance()
 {
-	m_Pos += 1;
-	m_currentChar = (m_Pos < m_Text.size()) ? m_Text[m_Pos] : (char)0;
+	m_Pos->advance(m_currentChar);
+	m_currentChar = (m_Pos->getIndex() < m_Text.size()) ? m_Text[m_Pos->getIndex()] : (char)0;
 }
 
 
@@ -68,9 +77,10 @@ std::shared_ptr<token_list> Lexer::make_tokens(Error* err)
 			}
 
 			else {
+				std::shared_ptr<Position> pos_start = m_Pos;
 				char temp_char = m_currentChar;
 				advance();
-				Error e = IllegalCharError(temp_char);
+				Error e = IllegalCharError(pos_start, m_Pos, temp_char);
 				*err = err ? e : *err;
 				std::cout << e.as_string() << std::endl;
 				return myTokenList;
@@ -114,17 +124,25 @@ std::string Lexer::make_number(bool& is_int)
 	}
 }
 
-LexerVal Lexer::Run(std::string& text)
+LexerVal Lexer::Run(std::string& fn, std::string& text)
 {
-	Lexer lexer = Lexer(text);
+	Lexer lexer = Lexer(fn, text);
 	LexerVal LRV;
 	LRV.list = lexer.make_tokens(&LRV.error);
 	return LRV;
 }
 
-LexerVal Lexer::Run(std::string&& text)
+LexerVal Lexer::Run(std::string&& fn, std::string& text)
 {
-	Lexer lexer = Lexer(text);
+	Lexer lexer = Lexer(fn, text);
+	LexerVal LRV;
+	LRV.list = lexer.make_tokens(&LRV.error);
+	return LRV;
+}
+
+LexerVal Lexer::Run(std::string&& fn, std::string&& text)
+{
+	Lexer lexer = Lexer(fn, text);
 	LexerVal LRV;
 	LRV.list = lexer.make_tokens(&LRV.error);
 	return LRV;
@@ -136,7 +154,7 @@ std::ostream& operator<<(std::ostream& os, LexerVal& val)
 {
 	if (val.error.isInitialized())
 	{
-		return std::cout << val.error.as_string();
+		return os << val.error.as_string();
 	}
 
 	std::string printed_val = "";
@@ -145,5 +163,5 @@ std::ostream& operator<<(std::ostream& os, LexerVal& val)
 		printed_val += tk_elem->repr() + " ";
 	}
 
-	return std::cout << printed_val;
+	return os << printed_val;
 }

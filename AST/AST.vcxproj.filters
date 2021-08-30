@@ -33,6 +33,9 @@
     <ClInclude Include="AST\Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AST\Position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TreeNode.cpp">
@@ -45,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AST\Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AST\Position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

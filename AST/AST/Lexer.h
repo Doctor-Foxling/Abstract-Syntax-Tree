@@ -5,6 +5,7 @@
 
 #include "Token.h"
 #include "Utility/Utility.h"
+#include "Position.h"
 #include "Error.h"
 
 static const std::string DIGITS = "0123456789";
@@ -29,20 +30,22 @@ struct LexerVal
 class Lexer
 {
 public:
-	Lexer(std::string text);
+	Lexer(std::string& fn, std::string& text);
+	Lexer(std::string&& fn, std::string&& text);
 
 	void advance();
 
 	std::shared_ptr<token_list> make_tokens(Error* err = nullptr);
 	std::string make_number(bool& is_int);
 
-	static LexerVal Run(std::string& text);
-
-	static LexerVal Run(std::string&& text);
+	static LexerVal Run(std::string& fn, std::string& text);
+	static LexerVal Run(std::string&& fn, std::string& text);
+	static LexerVal Run(std::string&& fn, std::string&& text);
 
 private:
+	std::string m_fileName;
 	std::string m_Text;
-	int m_Pos;
+	std::shared_ptr<Position> m_Pos;
 	char m_currentChar;
 };
 
