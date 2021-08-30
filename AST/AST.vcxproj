@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\AST;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,17 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Error.h" />
-    <ClInclude Include="Lexer.h" />
-    <ClInclude Include="Token.h" />
-    <ClInclude Include="TokenType.h" />
+    <ClInclude Include="AST\Error.h" />
+    <ClInclude Include="AST\Lexer.h" />
+    <ClInclude Include="AST\Token.h" />
+    <ClInclude Include="AST\TokenType.h" />
     <ClInclude Include="TreeNode.h" />
-    <ClInclude Include="Utility.h" />
+    <ClInclude Include="Utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entrypoint.h" />
-    <ClCompile Include="Error.cpp" />
-    <ClCompile Include="Lexer.cpp" />
+    <ClCompile Include="AST\Error.cpp" />
+    <ClCompile Include="AST\Lexer.cpp" />
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

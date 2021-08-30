@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "Token.h"
-#include "Utility.h"
+#include "Utility/Utility.h"
 #include "Error.h"
 
 static const std::string DIGITS = "0123456789";

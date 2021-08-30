@@ -3,10 +3,10 @@
 #include <iostream>
 #include <typeinfo>
 
-#include "Utility.h"
-#include "Token.h"
+#include "Utility/Utility.h"
+#include "AST/Token.h"
 #include "TreeNode.h"
-#include "Lexer.h"
+#include "AST/Lexer.h"
 
 
 
@@ -14,7 +14,7 @@ int main()
 {
 	//Token<int>* tok = new Token<int>(TT::INT, 5);
 
-	LexerVal val = Lexer::Run("5.78 + 9.5 / (5 * 8)");
+	LexerVal val = Lexer::Run("u5.78 + 9.5 / (5 * 8)");
 
 	std::cout << val;
 	//std::cout << tok->repr() << std::endl;
