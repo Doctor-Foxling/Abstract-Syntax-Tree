@@ -71,6 +71,6 @@ public:
 		else if (m_Type == TT::FLOAT)
 			return TT_to_string(m_Type) + ": " + std::to_string(tk_data.tk_float);
 		else
-			return TT_to_string(m_Type) + ": " + "None";
+			return TT_to_string(m_Type);
 	}
 };

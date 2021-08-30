@@ -14,15 +14,9 @@ int main()
 {
 	//Token<int>* tok = new Token<int>(TT::INT, 5);
 
-	Lexer* lexer = new Lexer("(3.45 + 4 / 5.67)");
+	LexerVal val = Lexer::Run("5.78 + 9.5 / (5 * 8)");
 
-	std::shared_ptr<token_list> tk_list = lexer->make_tokens();
-
-	for (auto elem_tk : *tk_list)
-	{
-		std::cout << "Before: ";
-		std::cout << elem_tk->repr() << std::endl;
-	}
+	std::cout << val;
 	//std::cout << tok->repr() << std::endl;
 
 	for (char i : " \t")

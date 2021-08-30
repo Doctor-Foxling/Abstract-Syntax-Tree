@@ -15,7 +15,7 @@ void Lexer::advance()
 }
 
 
-std::shared_ptr<token_list> Lexer::make_tokens()
+std::shared_ptr<token_list> Lexer::make_tokens(Error* err)
 {
 	std::shared_ptr<token_list> myTokenList = std::make_shared<token_list>();
 	bool is_int;
@@ -70,7 +70,8 @@ std::shared_ptr<token_list> Lexer::make_tokens()
 			else {
 				char temp_char = m_currentChar;
 				advance();
-				Error e = IllegalCharError("| >" + temp_char);
+				Error e = IllegalCharError(temp_char);
+				*err = err ? e : *err;
 				std::cout << e.as_string() << std::endl;
 				return myTokenList;
 			}
@@ -111,4 +112,38 @@ std::string Lexer::make_number(bool& is_int)
 		is_int = false;
 		return num_str;
 	}
+}
+
+LexerVal Lexer::Run(std::string& text)
+{
+	Lexer lexer = Lexer(text);
+	LexerVal LRV;
+	LRV.list = lexer.make_tokens(&LRV.error);
+	return LRV;
+}
+
+LexerVal Lexer::Run(std::string&& text)
+{
+	Lexer lexer = Lexer(text);
+	LexerVal LRV;
+	LRV.list = lexer.make_tokens(&LRV.error);
+	return LRV;
+}
+
+
+//Overloaded operators
+std::ostream& operator<<(std::ostream& os, LexerVal& val)
+{
+	if (val.error.isInitialized())
+	{
+		return std::cout << val.error.as_string();
+	}
+
+	std::string printed_val = "";
+	for (std::shared_ptr<Token> tk_elem : *val.list)
+	{
+		printed_val += tk_elem->repr() + " ";
+	}
+
+	return std::cout << printed_val;
 }

@@ -5,7 +5,7 @@ Error::Error()
 }
 
 Error::Error(std::string error_name, std::string details)
-	: m_errorName(error_name), m_details(details)
+	: m_errorName(error_name), m_details(details), initialized(true)
 {}
 
 std::string Error::as_string()
