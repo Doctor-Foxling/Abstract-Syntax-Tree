@@ -12,17 +12,9 @@
 
 int main()
 {
-	//Token<int>* tok = new Token<int>(TT::INT, 5);
+	std::string some_text = "(1 + 2 + 3) I must've called you thousand times";
 
-	LexerVal val = Lexer::Run("<myFile>","5.78 + 9.5 / (5 * 8)");
+	LexerVal val = Lexer::Run("<myFile>",some_text);
 
-	std::cout << val;
-	//std::cout << tok->repr() << std::endl;
-
-	for (char i : " \t")
-	{
-		std::cout << "Bob: ";
-		std::cout << i;
-		std::cout << "Builder" << std::endl;
-	}
+	std::cout << val << std::endl;
 }

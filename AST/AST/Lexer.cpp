@@ -6,14 +6,14 @@
 Lexer::Lexer(std::string& fn, std::string& text)
 	: m_Text(text), m_currentChar((char)0)
 {
-	m_Pos = std::make_shared<Position>(-1, 0, -1, fn, text);
+	m_Pos = std::make_shared<Position>(-1, 1, -1, fn, text);
 	advance();
 }
 
 Lexer::Lexer(std::string&& fn, std::string&& text)
 	: m_Text(text), m_currentChar((char)0)
 {
-	m_Pos = std::make_shared<Position>(-1, 0, -1, fn, text);
+	m_Pos = std::make_shared<Position>(-1, 1, -1, fn, text);
 	advance();
 }
 
